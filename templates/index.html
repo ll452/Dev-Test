@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dating Idea Generator</title>
+</head>
+<body>
+    <h1>Dating Idea Generator</h1>
+    <form action="/recommendation" method="post">
+        <label for="weather">Preferred Weather:</label>
+        <select name="weather">
+            <option value="sunny">Sunny</option>
+            <option value="rainy">Rainy</option>
+            <option value="cloudy">Cloudy</option>
+        </select>
+        <br>
+        <label for="time_of_day">Time of Day:</label>
+        <select name="time_of_day">
+            <option value="morning">Morning</option>
+            <option value="afternoon">Afternoon</option>
+            <option value="evening">Evening</option>
+            <option value="night">Night</option>
+        </select>
+        <br>
+        <label for="mood">Mood:</label>
+        <input type="text" name="mood" placeholder="What are you in the mood for?">
+        <br>
+        <label for="location">Location:</label>
+        <input type="text" name="location" placeholder="City or address">
+        <br>
+        <input type="submit" value="Get Recommendation">
+    </form>
+</body>
+</html>
