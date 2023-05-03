@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dating Idea Recommendation</title>
+    <title>Recommended Dating Ideas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h1>Your Dating Idea</h1>
-    <p>
-        We recommend visiting <a href="{{ recommendation.url }}">{{ recommendation.name }}</a>!
-        It's located at {{ recommendation.location.address1 }}.
-    </p>
-    <p><a href="{{ url_for('index') }}">Back to start</a></p>
+    <div class="container">
+        <h1 class="mt-5">Recommended Dating Ideas</h1>
+        {% for idea in recommendations %}
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ idea.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ idea.categories[0].title }}</h6>
+                <p class="card-text">
+                    {{ idea.location.address1 }},
+                    {{ idea.location.city }},
+                    {{ idea.location.state }} {{ idea.location.zip_code }}
+                </p>
+                <a href="{{ idea.url }}" class="card-link" target="_blank">More details on Yelp</a>
+            </div>
+        </div>
+        {% endfor %}
+        <a href="/" class="btn btn-primary mt-4">Try again</a>
+    </div>
 </body>
 </html>

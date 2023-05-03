@@ -1,33 +1,129 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Dating Idea Generator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Activity Recommender</title>
 </head>
 <body>
-    <h1>Dating Idea Generator</h1>
-    <form action="/recommendation" method="post">
-        <label for="weather">Preferred Weather:</label>
-        <select name="weather">
-            <option value="sunny">Sunny</option>
-            <option value="rainy">Rainy</option>
-            <option value="cloudy">Cloudy</option>
-        </select>
-        <br>
-        <label for="time_of_day">Time of Day:</label>
-        <select name="time_of_day">
-            <option value="morning">Morning</option>
-            <option value="afternoon">Afternoon</option>
-            <option value="evening">Evening</option>
-            <option value="night">Night</option>
-        </select>
-        <br>
-        <label for="mood">Mood:</label>
-        <input type="text" name="mood" placeholder="What are you in the mood for?">
-        <br>
-        <label for="location">Location:</label>
-        <input type="text" name="location" placeholder="City or address">
-        <br>
-        <input type="submit" value="Get Recommendation">
-    </form>
+    <div class="container">
+        <h1 class="mt-5">Activity Recommender</h1>
+        <form action="/recommendation" method="post">
+            <div class="form-group">
+                <label for="weather">Preferred Weather:</label>
+                <select class="form-control" name="weather" id="weather">
+                    <option value="sunny">Sunny</option>
+                    <option value="cloudy">Cloudy</option>
+                    <option value="rainy">Rainy</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="time_of_day">Time of Day:</label>
+                <select class="form-control" name="time_of_day" id="time_of_day">
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                    <option value="night">Night</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="activity">Activity:</label>
+                <select class="form-control" name="activity" id="activity">
+                    <option value="food">Food</option>
+                    <option value="outdoors">Outdoors</option>
+                    <option value="arts">Arts</option>
+                    <option value="entertainment">Entertainment</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="preferences">Preferences:</label>
+                <select class="form-control" name="preferences" id="preferences">
+                    <!-- Options will be populated using JavaScript -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="budget">Budget:</label>
+                <select class="form-control" name="budget" id="budget">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" class="form-control" name="location" id="location" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Get Recommendations</button>
+        </form>
+    </div>
+
+    <script>
+        const activitySelect = document.getElementById('activity');
+        const preferencesSelect = document.getElementById('preferences');
+
+        const preferencesOptions = {
+            'food': [
+                {value: 'any', text: 'Any'},
+                {value: 'italian', text: 'Italian'},
+                {value: 'chinese', text: 'Chinese'},
+                {value: 'mexican', text: 'Mexican'},
+                {value: 'indian', text: 'Indian'},
+                {value: 'japanese', text: 'Japanese'},
+                {value: 'vegetarian', text: 'Vegetarian'},
+                {value: 'vegan', text: 'Vegan'},
+                {value: 'thai', text: 'Thai'},
+                {value: 'french', text: 'French'},
+                {value: 'mediterranean', text: 'Mediterranean'},
+            ],
+            'outdoors': [
+                {value: 'any', text: 'Any'},
+                {value: 'hiking', text: 'Hiking'},
+                {value: 'parks', text: 'Parks'},
+                {value: 'biking', text: 'Biking'},
+                {value: 'beaches', text: 'Beaches'},
+                {value: 'gardens', text: 'Gardens'},
+                {value: 'fishing', text: 'Fishing'},
+            ],
+            'arts': [
+            {value: 'theater', text: 'Theater'},
+            {value: 'dance', text: 'Dance'},
+            {value: 'music', text: 'Music'},
+            {value: 'photography', text: 'Photography'},
+            ],
+            'entertainment': [
+            {value: 'movies', text: 'Movies'},
+            {value: 'bowling', text: 'Bowling'},
+            {value: 'arcades', text: 'Arcades'},
+            {value: 'escape_rooms', text: 'Escape Rooms'},
+            {value: 'sports', text: 'Sports'},
+            ],
+            'shopping': [
+            {value: 'any', text: 'Any'},
+            {value: 'malls', text: 'Malls'},
+            {value: 'boutiques', text: 'Boutiques'},
+            {value: 'vintage', text: 'Vintage'},
+            {value: 'electronics', text: 'Electronics'},
+            {value: 'bookstores', text: 'Bookstores'},
+            ],
+        };
+
+        function updatePreferencesOptions() {
+            const selectedActivity = activitySelect.value;
+            preferencesSelect.innerHTML = '';
+
+            if (preferencesOptions[selectedActivity]) {
+                preferencesOptions[selectedActivity].forEach(option => {
+                    const opt = document.createElement('option');
+                    opt.value = option.value;
+                    opt.textContent = option.text;
+                    preferencesSelect.appendChild(opt);
+                });
+            }
+        }
+
+        activitySelect.addEventListener('change', updatePreferencesOptions);
+        updatePreferencesOptions();
+    </script>
 </body>
 </html>
